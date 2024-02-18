@@ -71,14 +71,17 @@ const priceData = {
     oRAngGEs: '48.7584',
     };
     
-    function optimizer(data) {
-        const newData=priceData((accumulator,priceData)=>{
-
-        }, {})
+    function optimizer(d) {
+        const newData= Object.fromEntries(Object.entries(d).map(([key,value]=>[key.toLowerCase(),
+        +(value).toFixed(2)]))
+        );
+        return newData;
     };
     
     let updatedPriceData = optimizer(priceData);
     
     console.log(updatedPriceData) // {apples: '23.40', bananas: '48.00', oranges: '48.76'}
     
-    
+
+//Задача на фільтрування масиву
+
