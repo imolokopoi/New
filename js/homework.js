@@ -45,32 +45,61 @@ const priceData = {
 
 //console.log(filteredNames); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
 
+const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
+
+let filteredNames = [];
+
+userNames.forEach(name => {
+    if (['А', 'Е', 'Є', 'И', 'І', 'Ї', 'О', 'У', 'Ю', 'Я'].includes(name[0])) {
+        filteredNames.push(name);
+    }
+});
+
+console.log(filteredNames);
+
+const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
+
+const newNames = userNames.map(name => {
+    return ['А', 'Е', 'Є', 'И', 'І', 'Ї', 'О', 'У', 'Ю', 'Я'].includes(name[0]) ? name : null;
+}).filter(name => name !== null);
+
+console.log(newNames);
+
 //Задача на повернення ініціалів для кожного імені з масиву, посортованих в алфавітному порядку
+//const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
+//let initials;
+
+//const splitNames = userNames.map(name => name.split(" "));
+
+//splitNames.sort(function(a, b) {
+//  const lastNameA = a[0].toLowerCase();
+//  const lastNameB = b[0].toLowerCase();
+
+ // if (lastNameA < lastNameB) {
+ //   return -1;
+ // } else if (lastNameA > lastNameB) {
+ //   return 1;
+ // } else {
+ //   return 0;
+  //}
+//});
+
+
+//initials = splitNames.map(function(nameParts) {
+//  const firstNameInitial = nameParts[1].charAt(0);
+//  const middleNameInitial = nameParts[2].charAt(0);
+//  const lastNameInitial = nameParts[0].charAt(0);
+//  return `${firstNameInitial}.${middleNameInitial}.${lastNameInitial}.`;
+//});
+
+//console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
 const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
-let initials;
 
-const splitNames = userNames.map(name => name.split(" "));
-
-splitNames.sort(function(a, b) {
-  const lastNameA = a[0].toLowerCase();
-  const lastNameB = b[0].toLowerCase();
-
-  if (lastNameA < lastNameB) {
-    return -1;
-  } else if (lastNameA > lastNameB) {
-    return 1;
-  } else {
-    return 0;
-  }
-});
-
-
-initials = splitNames.map(function(nameParts) {
-  const firstNameInitial = nameParts[1].charAt(0);
-  const middleNameInitial = nameParts[2].charAt(0);
-  const lastNameInitial = nameParts[0].charAt(0);
-  return `${firstNameInitial}.${middleNameInitial}.${lastNameInitial}.`;
-});
+const initials = userNames
+  .map(name => name.split(" "))
+  .sort((a, b) => a[0].localeCompare(b[0]))
+  .map(nameParts => nameParts.slice(1).map(part => part[0]).join('.'))
+  .map(initial => initial.toUpperCase());
 
 console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
 
