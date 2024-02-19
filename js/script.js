@@ -39,7 +39,7 @@
     str=str.toLowerCase();
     console.log(str)
     //for (let it=0; it<str.length; it++)
-    for (let it of str) {
+    for (let it of str.toLowerCase()) {
     //if (str[it]==="o")
     if (it==="o"){
             sumO++;
