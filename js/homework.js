@@ -13,8 +13,8 @@ const priceData = {
     oRAngGEs: '48.7584',
     };
     
-    function optimizer(d) {
-        const newData= Object.fromEntries(Object.entries(d).map(([key,value])=>
+    function optimizer(priceDataF) {
+        const newData= Object.fromEntries(Object.entries(priceDataF).map(([key,value])=>
         [key.toLowerCase(),
         parseFloat(value).toFixed(2)]))
         ;
@@ -59,11 +59,21 @@ console.log(filteredNames);
 
 const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
 
-const newNames = userNames.map(name => {
-    return ['А', 'Е', 'Є', 'И', 'І', 'Ї', 'О', 'У', 'Ю', 'Я'].includes(name[0]) ? name : null;
-}).filter(name => name !== null);
+// Отримуємо окремий масив літер
+const firstLetters = userNames.map(name => name[0].toUpperCase());
 
-console.log(newNames);
+// Фільтруємо імена за умовою
+const filteredNames = userNames.filter(name => ['А', 'Е', 'Є', 'И', 'І', 'Ї', 'О', 'У', 'Ю', 'Я'].includes(name[0].toUpperCase()));
+
+console.log(firstLetters); // ['П', 'Е', 'Ю', 'І', 'М', 'Я', 'В', 'А', 'О']
+console.log(filteredNames); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
+//const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
+
+//const newNames = userNames.map(name => {
+//    return ['А', 'Е', 'Є', 'И', 'І', 'Ї', 'О', 'У', 'Ю', 'Я'].includes(name[0]) ? name : null;
+//}).filter(name => name !== null);
+
+//console.log(newNames);
 
 //Задача на повернення ініціалів для кожного імені з масиву, посортованих в алфавітному порядку
 //const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
@@ -97,9 +107,9 @@ const userNames = ["Петрик Ольга Іванівна", "Гнатюк П�
 
 const initials = userNames
   .map(name => name.split(" "))
-  .sort((a, b) => a[0].localeCompare(b[0]))
-  .map(nameParts => nameParts.slice(1).map(part => part[0]).join('.'))
-  .map(initial => initial.toUpperCase());
+  .map(nameParts => nameParts.map(part => part[0]).join('.'))
+  .map(initial => initial.toUpperCase())
+  .sort((a, b) => a.localeCompare(b));
 
 console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
 
